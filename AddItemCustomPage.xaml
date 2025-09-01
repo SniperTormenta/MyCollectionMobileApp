@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCollectionMobileApp.AddItemCustomPage"
+             BackgroundColor="#f8fbfa"
+             Title="Add Item - Custom">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0" Margin="0">
+
+        <!-- Заголовок и кнопка возврата -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="Auto,*,Auto" 
+              BackgroundColor="#f8fbfa" 
+              Padding="16,8,16,8">
+            <ImageButton x:Name="BackButton"
+                         Source="back_icon.png"
+                         WidthRequest="24"
+                         HeightRequest="24"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Center"
+                         Clicked="OnBackButtonClicked" />
+            <Label Grid.Column="1"
+                   Text="Add Item - Custom"
+                   TextColor="#0e1a13"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Индикаторы прогресса (шаг 3 активен) -->
+        <HorizontalStackLayout Grid.Row="1"
+                               Spacing="12"
+                               HorizontalOptions="Center"
+                               Padding="0,20,0,20">
+            <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" BackgroundColor="#d1e6d9" />
+            <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" BackgroundColor="#d1e6d9" />
+            <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" BackgroundColor="#38e07b" />
+        </HorizontalStackLayout>
+
+        <!-- Поля ввода (только кастомные, добавляемые пользователем) -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout x:Name="CustomFieldsLayout" Spacing="12" Padding="16">
+                <!-- Здесь будут добавлены кастомные поля динамически -->
+                <Button x:Name="AddCustomFieldButton"
+                        Text="Добавить поле"
+                        TextColor="#0e1a13"
+                        BackgroundColor="#38e07b"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HeightRequest="48"
+                        Margin="0,4"
+                        CornerRadius="8"
+                        Clicked="OnAddCustomFieldClicked" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Кнопка Сохранить -->
+        <Button Grid.Row="3"
+                Text="Сохранить"
+                TextColor="#0e1a13"
+                BackgroundColor="#38e07b"
+                FontSize="16"
+                FontAttributes="Bold"
+                HeightRequest="48"
+                Margin="16,12"
+                CornerRadius="8"
+                Clicked="OnSaveButtonClicked" />
+    </Grid>
+</ContentPage>

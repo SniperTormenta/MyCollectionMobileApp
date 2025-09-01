@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCollectionMobileApp.AddItemDetailsPage"
+             BackgroundColor="#f8fbfa"
+             Title="Add Item - Details">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0" Margin="0">
+
+        <!-- Заголовок и кнопка возврата -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="Auto,*,Auto" 
+              BackgroundColor="#f8fbfa" 
+              Padding="16,8,16,8">
+            <ImageButton x:Name="BackButton"
+                         Source="back_icon.png"
+                         WidthRequest="24"
+                         HeightRequest="24"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Center"
+                         Clicked="OnBackButtonClicked" />
+            <Label Grid.Column="1"
+                   Text="Add Item - Details"
+                   TextColor="#0e1a13"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Индикаторы прогресса (шаг 2 активен) -->
+        <HorizontalStackLayout Grid.Row="1"
+                               Spacing="12"
+                               HorizontalOptions="Center"
+                               Padding="0,20,0,20">
+            <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" BackgroundColor="#d1e6d9" />
+            <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" BackgroundColor="#38e07b" />
+            <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" BackgroundColor="#d1e6d9" />
+        </HorizontalStackLayout>
+
+        <!-- Поля ввода -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Spacing="12" Padding="16">
+                <!-- Описание (многострочное) -->
+                <Editor x:Name="DescriptionEditor"
+                        Placeholder="Description"
+                        PlaceholderColor="#51946c"
+                        TextColor="#0e1a13"
+                        BackgroundColor="#e8f2ec"
+                        HeightRequest="100"
+                        FontSize="16"
+                        Margin="0,4"
+                        Text="{Binding Description}" />
+
+                <!-- Состояние (Picker) -->
+                <Picker x:Name="ConditionPicker"
+                        Title="Select Condition"
+                        TextColor="#0e1a13"
+                        BackgroundColor="#e8f2ec"
+                        HeightRequest="56"
+                        FontSize="16"
+                        Margin="0,4"
+                        SelectedItem="{Binding Condition}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Новое</x:String>
+                            <x:String>Отличное</x:String>
+                            <x:String>Хорошее</x:String>
+                            <x:String>Удовлетворительное</x:String>
+                            <x:String>Плохое</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <!-- Место хранения -->
+                <Entry x:Name="StorageEntry"
+                       Placeholder="Storage Location"
+                       PlaceholderColor="#51946c"
+                       TextColor="#0e1a13"
+                       BackgroundColor="#e8f2ec"
+                       HeightRequest="56"
+                       FontSize="16"
+                       Margin="0,4"
+                       ClearButtonVisibility="WhileEditing"
+                       Text="{Binding StorageLocation}" />
+
+                <!-- Дата приобретения -->
+                <DatePicker x:Name="AcquisitionDatePicker"
+                            Format="dd/MM/yyyy"
+                            TextColor="#0e1a13"
+                            BackgroundColor="#e8f2ec"
+                            HeightRequest="56"
+                            FontSize="16"
+                            Margin="0,4"
+                            Date="{Binding AcquisitionDate}" />
+
+                <!-- Стоимость -->
+                <Grid ColumnDefinitions="*,Auto" Margin="0,4">
+                    <Entry x:Name="CostEntry"
+                           Placeholder="Cost"
+                           PlaceholderColor="#51946c"
+                           TextColor="#0e1a13"
+                           BackgroundColor="#e8f2ec"
+                           HeightRequest="56"
+                           FontSize="16"
+                           Keyboard="Numeric"
+                           ClearButtonVisibility="WhileEditing"
+                           Text="{Binding Cost}" />
+                    <Picker Grid.Column="1"
+                            x:Name="CurrencyPicker"
+                            Title="Currency"
+                            TextColor="#0e1a13"
+                            BackgroundColor="#e8f2ec"
+                            WidthRequest="100"
+                            HeightRequest="56"
+                            FontSize="16"
+                            SelectedItem="{Binding Currency}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>USD</x:String>
+                                <x:String>EUR</x:String>
+                                <x:String>RUB</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Кнопка Next -->
+        <Button Grid.Row="3"
+                Text="Next"
+                TextColor="#0e1a13"
+                BackgroundColor="#38e07b"
+                FontSize="16"
+                FontAttributes="Bold"
+                HeightRequest="48"
+                Margin="16,12"
+                CornerRadius="8"
+                Clicked="OnNextButtonClicked" />
+    </Grid>
+</ContentPage>
