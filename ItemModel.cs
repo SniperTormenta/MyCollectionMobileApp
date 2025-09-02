@@ -14,10 +14,15 @@ public class ItemModel
     public string StorageLocation { get; set; } = string.Empty;
     public DateTime AcquisitionDate { get; set; } = DateTime.Now;
     public decimal Cost { get; set; } = 0;
-    public string Currency { get; set; } = "USD";
+    public string Currency { get; set; } = "RUB";
     public Dictionary<string, string> CustomFields { get; set; } = new Dictionary<string, string>();
 
-    // Добавьте коллекции для Picker'ов
+    // Коллекции для Picker'ов
+    public ObservableCollection<string> Categories { get; } = new ObservableCollection<string>
+    {
+        "Вино", "Книги", "Комиксы", "Фигурки", "Растения", "Другое"
+    };
+
     public ObservableCollection<string> Conditions { get; } = new ObservableCollection<string>
     {
         "Новое", "Отличное", "Хорошее", "Удовлетворительное", "Плохое"

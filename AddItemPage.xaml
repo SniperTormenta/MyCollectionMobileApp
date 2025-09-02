@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyCollectionMobileApp.AddItemPage"
              BackgroundColor="#f8fbfa"
-             Title="Add Item - Basic">
+             Title="Добавление - Основное">
 
     <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0" Margin="0">
 
@@ -20,7 +20,7 @@
                          VerticalOptions="Center"
                          Clicked="OnBackButtonClicked" />
             <Label Grid.Column="1"
-                   Text="Add Item - Basic"
+                   Text="Добавление - Основное"
                    TextColor="#0e1a13"
                    FontSize="18"
                    FontAttributes="Bold"
@@ -43,7 +43,7 @@
             <VerticalStackLayout Spacing="12" Padding="16">
                 <!-- Название элемента (обязательное) -->
                 <Entry x:Name="NameEntry"
-                       Placeholder="Item Name *"
+                       Placeholder="Название элемента *"
                        PlaceholderColor="#51946c"
                        TextColor="#0e1a13"
                        BackgroundColor="#e8f2ec"
@@ -55,24 +55,14 @@
 
                 <!-- Категория (Picker) -->
                 <Picker x:Name="CategoryPicker"
-                        Title="Select Category *"
+                        Title="Выберите категорию *"
                         TextColor="#0e1a13"
                         BackgroundColor="#e8f2ec"
                         HeightRequest="56"
                         FontSize="16"
                         Margin="0,4"
-                        SelectedItem="{Binding Category}">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Вино</x:String>
-                            <x:String>Книги</x:String>
-                            <x:String>Комиксы</x:String>
-                            <x:String>Фигурки</x:String>
-                            <x:String>Растения</x:String>
-                            <x:String>Другое</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding Category}"/>
 
                 <!-- Добавление изображения -->
                 <Button x:Name="AddImageButton"
@@ -85,17 +75,59 @@
                         Margin="0,4"
                         CornerRadius="8"
                         Clicked="OnAddImageClicked" />
-                <Image x:Name="SelectedImage"
+
+                <!-- Контейнер для изображения - ИСПРАВЛЕНО -->
+                <Frame x:Name="ImageContainer"
                        HeightRequest="200"
-                       Aspect="AspectFit"
-                       IsVisible="False"
-                       Source="{Binding ImagePath}" />
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       BackgroundColor="#e8f2ec"
+                       Padding="0"
+                       CornerRadius="12"
+                       IsVisible="False">
+                    <Image x:Name="SelectedImage"
+                           Aspect="AspectFill"
+                           HeightRequest="200"
+                           WidthRequest="200">
+                        <Image.Clip>
+                            <RoundRectangleGeometry CornerRadius="12"
+                                                   Rect="0,0,200,200" />
+                        </Image.Clip>
+                    </Image>
+
+                    <!-- Кнопка изменения режима отображения -->
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnChangeImageAspectClicked" />
+                    </Frame.GestureRecognizers>
+
+                    <!-- Индикатор режима отображения -->
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" 
+                                   Binding="{Binding Source={x:Reference SelectedImage}, Path=Aspect}" 
+                                   Value="AspectFill">
+                            <Setter Property="BackgroundColor" Value="#e8f2ec" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Frame" 
+                                   Binding="{Binding Source={x:Reference SelectedImage}, Path=Aspect}" 
+                                   Value="AspectFit">
+                            <Setter Property="BackgroundColor" Value="#d1e6d9" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                </Frame>
+
+                <!-- Подпись под изображением -->
+                <Label x:Name="ImageHintLabel"
+                       Text="Нажмите на изображение для смены режима отображения"
+                       TextColor="#51946c"
+                       FontSize="12"
+                       HorizontalOptions="Center"
+                       IsVisible="False"/>
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Кнопка Next -->
+        <!-- Кнопка Далее -->
         <Button Grid.Row="3"
-                Text="Next"
+                Text="Далее"
                 TextColor="#0e1a13"
                 BackgroundColor="#38e07b"
                 FontSize="16"

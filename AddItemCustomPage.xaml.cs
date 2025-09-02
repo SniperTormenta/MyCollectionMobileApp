@@ -24,9 +24,9 @@ public partial class AddItemCustomPage : ContentPage
         var keyEntry = new Entry
         {
             Placeholder = "йКЧВ ОНКЪ",
-            PlaceholderColor = Color.FromArgb("#51946c"), // хяопюбкемн
-            TextColor = Color.FromArgb("#0e1a13"),        // хяопюбкемн
-            BackgroundColor = Color.FromArgb("#e8f2ec"),  // хяопюбкемн
+            PlaceholderColor = Color.FromArgb("#51946c"), 
+            TextColor = Color.FromArgb("#0e1a13"),        
+            BackgroundColor = Color.FromArgb("#e8f2ec"),  
             HeightRequest = 56,
             FontSize = 16,
             Margin = new Thickness(0, 4),
@@ -36,9 +36,9 @@ public partial class AddItemCustomPage : ContentPage
         var valueEntry = new Entry
         {
             Placeholder = "гМЮВЕМХЕ",
-            PlaceholderColor = Color.FromArgb("#51946c"), // хяопюбкемн
-            TextColor = Color.FromArgb("#0e1a13"),        // хяопюбкемн
-            BackgroundColor = Color.FromArgb("#e8f2ec"),  // хяопюбкемн
+            PlaceholderColor = Color.FromArgb("#51946c"), 
+            TextColor = Color.FromArgb("#0e1a13"),        
+            BackgroundColor = Color.FromArgb("#e8f2ec"),  
             HeightRequest = 56,
             FontSize = 16,
             Margin = new Thickness(0, 4),
