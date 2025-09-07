@@ -3,12 +3,40 @@
     public partial class MainPage : ContentPage
     {
         private Label _currentActiveNav;
+        private CollectionService _collectionService;
 
         public MainPage()
         {
             InitializeComponent();
             _currentActiveNav = HomeLabel;
+            _collectionService = CollectionService.Instance;
+
+            // Устанавливаем контекст данных
+            BindingContext = _collectionService;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            // Обновляем коллекцию при каждом появлении страницы
+            ItemsCollectionView.ItemsSource = null;
+            ItemsCollectionView.ItemsSource = _collectionService.FilteredItems;
+        }
+
+        // Добавьте этот метод для обработки нажатия на элемент
+        private async void OnItemTapped(object sender, EventArgs e)
+        {
+            if (sender is Frame frame && frame.BindingContext is ItemModel item)
+            {
+                // Анимация нажатия
+                await frame.ScaleTo(0.95, 100, Easing.SpringOut);
+                await frame.ScaleTo(1, 100, Easing.SpringIn);
+
+                // Переход на страницу деталей элемента
+                await Navigation.PushAsync(new ItemDetailsPage(item));
+            }
+        }
+
 
         // Обработчик нажатия на вкладку Grid
         private void OnGridTabTapped(object sender, EventArgs e)
@@ -119,6 +147,9 @@
                 await FiltersLabel.RotateTo(-10, 80, Easing.SinOut);
                 await FiltersLabel.RotateTo(10, 80, Easing.SinOut);
                 await FiltersLabel.RotateTo(0, 100, Easing.SpringOut);
+
+                // Переход на страницу фильтров
+                await Navigation.PushAsync(new FiltersPage());
             }
         }
 
@@ -136,6 +167,9 @@
                 await StatsLabel.ScaleTo(1, 150, Easing.SinIn);
                 await StatsLabel.ScaleTo(1.1, 100, Easing.SinOut);
                 await StatsLabel.ScaleTo(1, 100, Easing.SinIn);
+
+                // Переход на страницу статистики
+                await Navigation.PushAsync(new StatisticsPage());
             }
         }
 

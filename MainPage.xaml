@@ -2,230 +2,186 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyCollectionMobileApp.MainPage"
-             BackgroundColor="#f8fbfa">
+             BackgroundColor="#f8fbfa"
+             Title="Моя Коллекция">
 
     <!-- Главная сетка для разделения прокручиваемого контента и фиксированной навигации -->
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="Auto,*,Auto">
 
-        <!-- Прокручиваемый контент: вкладки и сетка элементов -->
-        <ScrollView Grid.Row="0">
-            <VerticalStackLayout Spacing="0">
-
-                <!-- Секция вкладок с нижней границей -->
-                <Border Stroke="#d1e6d9"
-                        StrokeThickness="1"
+        <!-- Секция вкладок с нижней границей -->
+        <Border Grid.Row="0"
+                Stroke="#d1e6d9"
+                StrokeThickness="1"
+                BackgroundColor="Transparent"
+                Padding="0"
+                Margin="0,0,0,12">
+            <Grid ColumnDefinitions="Auto,Auto"
+                  ColumnSpacing="32"
+                  Padding="16,0,16,0">
+                <!-- Активная вкладка Сетка -->
+                <Border x:Name="GridTab"
+                        Stroke="#38e07b"
+                        StrokeThickness="3"
+                        Padding="0,16,0,13"
                         BackgroundColor="Transparent"
-                        Padding="0"
-                        Margin="0,0,0,12">
-                    <Grid ColumnDefinitions="Auto,Auto"
-                          ColumnSpacing="32"
-                          Padding="16,0,16,0">
-                        <!-- Активная вкладка Сетка -->
-                        <Border x:Name="GridTab"
-                                Stroke="#38e07b"
-                                StrokeThickness="3"
-                                Padding="0,16,0,13"
-                                BackgroundColor="Transparent"
-                                Grid.Column="0">
-                            <Label x:Name="GridLabel"
-                                   Text="Сетка"
-                                   TextColor="#0e1a13"
-                                   FontSize="14"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center">
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup Name="CommonStates">
-                                        <VisualState Name="Normal">
-                                            <VisualState.Setters>
-                                                <Setter Property="TextColor" Value="#0e1a13" />
-                                                <Setter Property="Scale" Value="1" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState Name="PointerOver">
-                                            <VisualState.Setters>
-                                                <Setter Property="TextColor" Value="#38e07b" />
-                                                <Setter Property="Scale" Value="1.05" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState Name="Pressed">
-                                            <VisualState.Setters>
-                                                <Setter Property="TextColor" Value="#51946c" />
-                                                <Setter Property="Scale" Value="0.95" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                            </Label>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnGridTabTapped" />
-                            </Border.GestureRecognizers>
-                        </Border>
-
-                        <!-- Неактивная вкладка Список -->
-                        <Border x:Name="ListTab"
-                                Stroke="Transparent"
-                                StrokeThickness="3"
-                                Padding="0,16,0,13"
-                                BackgroundColor="Transparent"
-                                Grid.Column="1">
-                            <Label x:Name="ListLabel"
-                                   Text="Список"
-                                   TextColor="#51946c"
-                                   FontSize="14"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center">
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup Name="CommonStates">
-                                        <VisualState Name="Normal">
-                                            <VisualState.Setters>
-                                                <Setter Property="TextColor" Value="#51946c" />
-                                                <Setter Property="Scale" Value="1" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState Name="PointerOver">
-                                            <VisualState.Setters>
-                                                <Setter Property="TextColor" Value="#38e07b" />
-                                                <Setter Property="Scale" Value="1.05" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState Name="Pressed">
-                                            <VisualState.Setters>
-                                                <Setter Property="TextColor" Value="#0e1a13" />
-                                                <Setter Property="Scale" Value="0.95" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                            </Label>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnListTabTapped" />
-                            </Border.GestureRecognizers>
-                        </Border>
-                    </Grid>
+                        Grid.Column="0">
+                    <Label x:Name="GridLabel"
+                           Text="Сетка"
+                           TextColor="#0e1a13"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#0e1a13" />
+                                        <Setter Property="Scale" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#38e07b" />
+                                        <Setter Property="Scale" Value="1.05" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#51946c" />
+                                        <Setter Property="Scale" Value="0.95" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Label>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGridTabTapped" />
+                    </Border.GestureRecognizers>
                 </Border>
 
-                <!-- Сетка элементов (2 столбца для имитации auto-fit) -->
-                <Grid ColumnDefinitions="*,*"
-                      RowDefinitions="Auto,Auto,Auto"
-                      ColumnSpacing="12"
-                      RowSpacing="12"
-                      Padding="16">
+                <!-- Неактивная вкладка Список -->
+                <Border x:Name="ListTab"
+                        Stroke="Transparent"
+                        StrokeThickness="3"
+                        Padding="0,16,0,13"
+                        BackgroundColor="Transparent"
+                        Grid.Column="1">
+                    <Label x:Name="ListLabel"
+                           Text="Список"
+                           TextColor="#51946c"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#51946c" />
+                                        <Setter Property="Scale" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#38e07b" />
+                                        <Setter Property="Scale" Value="1.05" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#0e1a13" />
+                                        <Setter Property="Scale" Value="0.95" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Label>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnListTabTapped" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </Grid>
+        </Border>
 
-                    <!-- Элемент 1 -->
-                    <VerticalStackLayout Grid.Row="0"
-                                         Grid.Column="0"
-                                         Spacing="12">
-                        <Image Source="https://lh3.googleusercontent.com/aida-public/AB6AXuCvtfujHFYeKvx30XQ59a1lP0NUam8RgnX8oWdMuLWpCcJUqBRXXCbtRrFvzoTGDpdGZxgstPYSUgqxVUyPIyH0a3uY7UCQb2hUr-nnXmJDmTinHfa8tFL6v1znM6gdW7C5Ff_v5AoeT9FnJ36YN29nTkS0w9mutQY2ItVyDabC_lqjCUKbTYC87jtdO5dFREWaxBAN9ZFZwvdIfWsGy3LUApeBVR-jSmsrIjq-e-t7YHK-gHzHYdQDZRDP8KqU95CZuWjvLixD4w"
-                               Aspect="AspectFill"
-                               HeightRequest="158">
-                            <Image.Clip>
-                                <RoundRectangleGeometry CornerRadius="8"
-                                                       Rect="0,0,158,158" />
-                            </Image.Clip>
-                        </Image>
-                        <Label Text="Винтажное вино"
-                               TextColor="#0e1a13"
-                               FontSize="16"
-                               FontAttributes="None" />
-                    </VerticalStackLayout>
+        <!-- Коллекция элементов -->
+        <CollectionView Grid.Row="1"
+                x:Name="ItemsCollectionView"
+                ItemsSource="{Binding FilteredItems}"
+                SelectionMode="None"
+                Margin="16">
 
-                    <!-- Элемент 2 -->
-                    <VerticalStackLayout Grid.Row="0"
-                                         Grid.Column="1"
-                                         Spacing="12">
-                        <Image Source="https://lh3.googleusercontent.com/aida-public/AB6AXuCbWrxC48hVvIaqooumq_KKm4waZwNQnvKPP3-Lqo1LRAJGQcwP-LUu3oVCsy7hzUeiEo2j2NlVy7QgRDgXfF6FyPxjxsP0FVnZ3hiT_lN_F4ttIuwpPTt49f6fzFfYHFIY7muxYmnS8G9oz8cG6w8ESBCJIkKBvTEv2_zjOJjErFg6AHZzred_Oq5UmDpmhIv2znZLbC1bVciog4beDtFS0qdWXpXbYUUhWnNIqBnmJw1zzfekc5gzxXTkVdLYh9Tr28Q-cXr7oA"
-                               Aspect="AspectFill"
-                               HeightRequest="158">
-                            <Image.Clip>
-                                <RoundRectangleGeometry CornerRadius="8"
-                                                       Rect="0,0,158,158" />
-                            </Image.Clip>
-                        </Image>
-                        <Label Text="Редкий комикс"
-                               TextColor="#0e1a13"
-                               FontSize="16"
-                               FontAttributes="None" />
-                    </VerticalStackLayout>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                Span="2"
+                                HorizontalItemSpacing="12"
+                                VerticalItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
 
-                    <!-- Элемент 3 -->
-                    <VerticalStackLayout Grid.Row="1"
-                                         Grid.Column="0"
-                                         Spacing="12">
-                        <Image Source="https://lh3.googleusercontent.com/aida-public/AB6AXuBMbUqH1X7sLVxgcbQ2G_LVo__qLnUkOYaHfxxEWydOst5wOolQkpEdEcxOF0onl8rAQxbEkk-Lt3ILgGXwJZ7UY2ZADPEF8ocLQNI9JHksojeYKab7YSNVNjCPuQK5Vayg-unCdQhfnpDf_2GGNgarsD2G23uR6UsGax9WXv1yqnaFMOrY1fl6dGBXrEryxMpwYzqdCp4Axbl2pSSFFmIlGk3AdodP1USGjkUwHX2Vr1wZ_6jSKh6BVSscNmpnnVx5Sb0A0Z0etQ"
-                               Aspect="AspectFill"
-                               HeightRequest="158">
-                            <Image.Clip>
-                                <RoundRectangleGeometry CornerRadius="8"
-                                                       Rect="0,0,158,158" />
-                            </Image.Clip>
-                        </Image>
-                        <Label Text="Коллекционная фигурка"
-                               TextColor="#0e1a13"
-                               FontSize="16"
-                               FontAttributes="None" />
-                    </VerticalStackLayout>
+            <CollectionView.EmptyView>
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="40">
+                    <Label Text="🎉" FontSize="48" HorizontalOptions="Center"/>
+                    <Label Text="Ваша коллекция пуста" 
+                           FontSize="18" 
+                           TextColor="#51946c" 
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Нажмите '+' чтобы добавить первый элемент" 
+                           FontSize="14" 
+                           TextColor="#51946c" 
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,10,0,0"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
 
-                    <!-- Элемент 4 -->
-                    <VerticalStackLayout Grid.Row="1"
-                                         Grid.Column="1"
-                                         Spacing="12">
-                        <Image Source="https://lh3.googleusercontent.com/aida-public/AB6AXuC8lchwoC0Dkymk6fy2SdPfWgrRIWn3gwW1HTNah6H8TA4-EGFCTVXdDh1qNZViOB2-SegjyIqha9iIj8o717cTC44m2AAWY_-wCUm8IRE3faSQPRQuDtdqOvHEpwmwNPd9DZR3fvn8ifdO5RReR5ylIhF6djVri9mj02y-LujPLFYiwmd7kJDVUayi_Rkda801CU4-Iw3DDK3tUOuQYA72oKvns9ii0Y8X9zoBQl8eGEGYhd8kUe_OWckxGH2BWbabmgELUyQRpQ"
-                               Aspect="AspectFill"
-                               HeightRequest="158">
-                            <Image.Clip>
-                                <RoundRectangleGeometry CornerRadius="8"
-                                                       Rect="0,0,158,158" />
-                            </Image.Clip>
-                        </Image>
-                        <Label Text="Экзотическое растение"
-                               TextColor="#0e1a13"
-                               FontSize="16"
-                               FontAttributes="None" />
-                    </VerticalStackLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="0" 
+                           BackgroundColor="Transparent"
+                           BorderColor="Transparent">
+                        <VerticalStackLayout Spacing="8">
+                            <!-- Изображение элемента -->
+                            <Image Source="{Binding ImagePath}" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="150">
+                                <Image.Clip>
+                                    <RoundRectangleGeometry CornerRadius="8"
+                                                           Rect="0,0,150,150" />
+                                </Image.Clip>
+                            </Image>
 
-                    <!-- Элемент 5 -->
-                    <VerticalStackLayout Grid.Row="2"
-                                         Grid.Column="0"
-                                         Spacing="12">
-                        <Image Source="https://lh3.googleusercontent.com/aida-public/AB6AXuASdyVG2ueewgyzZiB2AG0COsPin9zPm5d0eIkabD1KKDfB2OXa-q0YblcGmI52_W3gmDiu1WmVBAYPYwrK58HvmNc2ruQ6qbWgHeWNzxUpvIPau999ev5z3dyDukU_v2BLDg9GiZouOJ6PEKcQbkjggCViHLfg4_RGtx2A7lI51Mp5Iz2b_YUHIqge_0QK-QLx4zUFHoDD8D0jFDyRXzuVRo3v7BiWYt725PAw7tcSHQibB05hnwSPZkFH_dH1hlGnrYUhY-veOA"
-                               Aspect="AspectFill"
-                               HeightRequest="158">
-                            <Image.Clip>
-                                <RoundRectangleGeometry CornerRadius="8"
-                                                       Rect="0,0,158,158" />
-                            </Image.Clip>
-                        </Image>
-                        <Label Text="Книга первого издания"
-                               TextColor="#0e1a13"
-                               FontSize="16"
-                               FontAttributes="None" />
-                    </VerticalStackLayout>
+                            <!-- Название и информация -->
+                            <VerticalStackLayout Spacing="4" Padding="8,0">
+                                <Label Text="{Binding Name}" 
+                                       TextColor="#0e1a13"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       MaxLines="1"
+                                       LineBreakMode="TailTruncation"/>
 
-                    <!-- Элемент 6 -->
-                    <VerticalStackLayout Grid.Row="2"
-                                         Grid.Column="1"
-                                         Spacing="12">
-                        <Image Source="https://lh3.googleusercontent.com/aida-public/AB6AXuBIbKPqb-KGG_Bgkt1PF8dKvDtCRBlrRTM7LC09glpqdIWVbO-xOtl_iFpsFdC5sedbqDd-Y_QJoxcjJjpjl8hfaXVEW4nJXQYlcmXMJYt_Koi39NvJUX0g8GSueQ8JOy8AuxIB5TUV6Gwuh02QperDg8ali0xbK7CwXWR7Z5M5AwfOpnqd165I7Rtp195cgMT8uZlQdfLNQxMszz4Ao_ssgtdt2t8BW3jyNV3qz_8AShtRGGpMyTZ_BV0iP4Z582QbAob-ql33PQ"
-                               Aspect="AspectFill"
-                               HeightRequest="158">
-                            <Image.Clip>
-                                <RoundRectangleGeometry CornerRadius="8"
-                                                       Rect="0,0,158,158" />
-                            </Image.Clip>
-                        </Image>
-                        <Label Text="Лимитированный винил"
-                               TextColor="#0e1a13"
-                               FontSize="16"
-                               FontAttributes="None" />
-                    </VerticalStackLayout>
-                </Grid>
-            </VerticalStackLayout>
-        </ScrollView>
+                                <Label Text="{Binding Category}" 
+                                       TextColor="#51946c"
+                                       FontSize="12"
+                                       MaxLines="1"/>
+
+                                <Label Text="{Binding Cost, StringFormat='{0:C} руб.'}" 
+                                       TextColor="#38e07b"
+                                       FontSize="14"
+                                       FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnItemTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!-- Фиксированная нижняя панель навигации -->
-        <VerticalStackLayout Grid.Row="1"
+        <VerticalStackLayout Grid.Row="2"
                              Spacing="0"
                              BackgroundColor="#f8fbfa">
             <Border Stroke="#e8f2ec"

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCollectionMobileApp.FiltersPage"
+             BackgroundColor="#f8fbfa"
+             Title="Фильтры">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          RowSpacing="0">
+
+        <!-- Шапка с кнопкой закрытия -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="Auto,*,Auto" 
+              BackgroundColor="#f8fbfa" 
+              Padding="16,12,16,8">
+
+            <ImageButton x:Name="CloseButton"
+                         Source="close_icon.png"
+                         WidthRequest="24"
+                         HeightRequest="24"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Center"
+                         Clicked="OnCloseButtonClicked"/>
+
+            <Label Grid.Column="1"
+                   Text="Фильтры"
+                   TextColor="#0e1a13"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Контент фильтров -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="0">
+
+                <!-- Категория -->
+                <Label Text="Категория"
+                       TextColor="#0e1a13"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       Margin="16,20,16,8"/>
+
+                <Picker x:Name="CategoryPicker"
+                        Title="Выберите категорию"
+                        TextColor="#0e1a13"
+                        BackgroundColor="#f8fbfa"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory}"
+                        HeightRequest="56"
+                        FontSize="16"
+                        Margin="16,8,16,16"/>
+
+                <!-- Диапазон цен -->
+                <Label Text="Диапазон цен"
+                       TextColor="#0e1a13"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       Margin="16,20,16,8"/>
+
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="12"
+                      Margin="16,8,16,16">
+
+                    <Entry x:Name="PriceFromEntry"
+                           Placeholder="От"
+                           PlaceholderColor="#51946c"
+                           TextColor="#0e1a13"
+                           BackgroundColor="#e8f2ec"
+                           HeightRequest="56"
+                           FontSize="16"
+                           Keyboard="Numeric"
+                           ClearButtonVisibility="WhileEditing"
+                           Text="{Binding PriceFrom}"/>
+
+                    <Entry x:Name="PriceToEntry"
+                           Grid.Column="1"
+                           Placeholder="До"
+                           PlaceholderColor="#51946c"
+                           TextColor="#0e1a13"
+                           BackgroundColor="#e8f2ec"
+                           HeightRequest="56"
+                           FontSize="16"
+                           Keyboard="Numeric"
+                           ClearButtonVisibility="WhileEditing"
+                           Text="{Binding PriceTo}"/>
+                </Grid>
+
+                <!-- Сортировка -->
+                <Label Text="Сортировка"
+                       TextColor="#0e1a13"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       Margin="16,20,16,8"/>
+
+                <VerticalStackLayout Spacing="8" 
+                                     Margin="16,8,16,16">
+
+                    <!-- По названию -->
+                    <Frame BackgroundColor="Transparent"
+                           BorderColor="{Binding SortByNameBorderColor}"
+                           CornerRadius="8"
+                           Padding="15"
+                           HasShadow="False">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="По названию"
+                                   TextColor="#0e1a13"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"/>
+
+                            <RadioButton Grid.Column="1"
+                                         Value="Name"
+                                         GroupName="SortBy"
+                                         IsChecked="{Binding IsSortByName}"
+                                         VerticalOptions="Center"
+                                         IsVisible="False"/>
+                        </Grid>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSortByNameTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <!-- По дате добавления -->
+                    <Frame BackgroundColor="Transparent"
+                           BorderColor="{Binding SortByDateBorderColor}"
+                           CornerRadius="8"
+                           Padding="15"
+                           HasShadow="False">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="По дате добавления"
+                                   TextColor="#0e1a13"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"/>
+
+                            <RadioButton Grid.Column="1"
+                                         Value="Date"
+                                         GroupName="SortBy"
+                                         IsChecked="{Binding IsSortByDate}"
+                                         VerticalOptions="Center"
+                                         IsVisible="False"/>
+                        </Grid>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSortByDateTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <!-- По цене -->
+                    <Frame BackgroundColor="Transparent"
+                           BorderColor="{Binding SortByPriceBorderColor}"
+                           CornerRadius="8"
+                           Padding="15"
+                           HasShadow="False">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="По цене"
+                                   TextColor="#0e1a13"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"/>
+
+                            <RadioButton Grid.Column="1"
+                                         Value="Price"
+                                         GroupName="SortBy"
+                                         IsChecked="{Binding IsSortByPrice}"
+                                         VerticalOptions="Center"
+                                         IsVisible="False"/>
+                        </Grid>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSortByPriceTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Кнопка применения фильтров -->
+        <Button Grid.Row="2"
+                Text="Применить фильтры"
+                TextColor="#0e1a13"
+                BackgroundColor="#38e07b"
+                FontSize="16"
+                FontAttributes="Bold"
+                HeightRequest="48"
+                Margin="16,12,16,16"
+                CornerRadius="8"
+                Clicked="OnApplyFiltersClicked"/>
+
+    </Grid>
+</ContentPage>

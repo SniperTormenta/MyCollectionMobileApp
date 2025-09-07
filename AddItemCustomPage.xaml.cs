@@ -57,7 +57,10 @@ public partial class AddItemCustomPage : ContentPage
 
     private async void OnSaveButtonClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("”спех", "Ёлемент сохранен", "OK");
+        // —охран€ем элемент в коллекцию
+        CollectionService.Instance.AddItem(_itemModel);
+
+        await DisplayAlert("”спех", "Ёлемент добавлен в коллекцию!", "OK");
         await Navigation.PopToRootAsync();
     }
 }

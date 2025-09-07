@@ -6,6 +6,7 @@ namespace MyCollectionMobileApp;
 
 public class ItemModel
 {
+    public string CostFormatted => $"{Cost:N0} {Currency}"; // для правильного отображения валюты
     public string Name { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
     public string ImagePath { get; set; } = string.Empty;
