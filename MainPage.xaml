@@ -8,100 +8,20 @@
     <!-- Главная сетка для разделения прокручиваемого контента и фиксированной навигации -->
     <Grid RowDefinitions="Auto,*,Auto">
 
-        <!-- Секция вкладок с нижней границей -->
+        <!-- Заголовок -->
         <Border Grid.Row="0"
                 Stroke="#d1e6d9"
                 StrokeThickness="1"
                 BackgroundColor="Transparent"
                 Padding="0"
                 Margin="0,0,0,12">
-            <Grid ColumnDefinitions="Auto,Auto"
-                  ColumnSpacing="32"
-                  Padding="16,0,16,0">
-                <!-- Активная вкладка Сетка -->
-                <Border x:Name="GridTab"
-                        Stroke="#38e07b"
-                        StrokeThickness="3"
-                        Padding="0,16,0,13"
-                        BackgroundColor="Transparent"
-                        Grid.Column="0">
-                    <Label x:Name="GridLabel"
-                           Text="Сетка"
-                           TextColor="#0e1a13"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="TextColor" Value="#0e1a13" />
-                                        <Setter Property="Scale" Value="1" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState Name="PointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Property="TextColor" Value="#38e07b" />
-                                        <Setter Property="Scale" Value="1.05" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="TextColor" Value="#51946c" />
-                                        <Setter Property="Scale" Value="0.95" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Label>
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnGridTabTapped" />
-                    </Border.GestureRecognizers>
-                </Border>
-
-                <!-- Неактивная вкладка Список -->
-                <Border x:Name="ListTab"
-                        Stroke="Transparent"
-                        StrokeThickness="3"
-                        Padding="0,16,0,13"
-                        BackgroundColor="Transparent"
-                        Grid.Column="1">
-                    <Label x:Name="ListLabel"
-                           Text="Список"
-                           TextColor="#51946c"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="TextColor" Value="#51946c" />
-                                        <Setter Property="Scale" Value="1" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState Name="PointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Property="TextColor" Value="#38e07b" />
-                                        <Setter Property="Scale" Value="1.05" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="TextColor" Value="#0e1a13" />
-                                        <Setter Property="Scale" Value="0.95" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Label>
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnListTabTapped" />
-                    </Border.GestureRecognizers>
-                </Border>
-            </Grid>
+            <Label Text="Моя Коллекция"
+                   TextColor="#0e1a13"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="0,16"/>
         </Border>
 
         <!-- Коллекция элементов -->
@@ -137,9 +57,9 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="0" 
+                    <Border Padding="0" 
                            BackgroundColor="Transparent"
-                           BorderColor="Transparent">
+                           Stroke="Transparent">
                         <VerticalStackLayout Spacing="8">
                             <!-- Изображение элемента -->
                             <Image Source="{Binding ImagePath}" 
@@ -172,239 +92,111 @@
                             </VerticalStackLayout>
                         </VerticalStackLayout>
 
-                        <Frame.GestureRecognizers>
+                        <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnItemTapped" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                        </Border.GestureRecognizers>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Фиксированная нижняя панель навигации -->
-        <VerticalStackLayout Grid.Row="2"
-                             Spacing="0"
-                             BackgroundColor="#f8fbfa">
-            <Border Stroke="#e8f2ec"
-                    StrokeThickness="1"
-                    BackgroundColor="#f8fbfa"
-                    Padding="16,8,16,12">
-                <Grid ColumnDefinitions="*,*,*,*,*"
-                      ColumnSpacing="8">
-                    <!-- Домой (активная) -->
-                    <VerticalStackLayout x:Name="HomeNav"
-                                         Spacing="4"
-                                         Grid.Column="0">
-                        <Label x:Name="HomeLabel"
-                               Text="🏠"
-                               FontSize="24"
-                               TextColor="#0e1a13"
-                               HorizontalTextAlignment="Center">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#0e1a13" />
-                                            <Setter Property="Scale" Value="1" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#38e07b" />
-                                            <Setter Property="Scale" Value="1.05" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#51946c" />
-                                            <Setter Property="Scale" Value="0.95" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Label>
-                        <Label Text="Главная"
-                               TextColor="#0e1a13"
-                               FontSize="12"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnHomeNavTapped" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+        <!-- Фиксированная нижняя панель навигации (ТОЧНО как в StatisticsPage) -->
+        <Border Grid.Row="2"
+                BackgroundColor="#f8fbfa"
+                Padding="0,8,0,0"
+                Stroke="#e8f2ec"
+                StrokeThickness="1"
+                StrokeShape="Rectangle">
 
-                    <!-- Добавить -->
-                    <VerticalStackLayout x:Name="AddItemNav"
-                                         Spacing="4"
-                                         Grid.Column="1">
-                        <Label x:Name="AddItemLabel"
-                               Text="➕"
-                               FontSize="24"
-                               TextColor="#51946c"
-                               HorizontalTextAlignment="Center">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#51946c" />
-                                            <Setter Property="Scale" Value="1" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#38e07b" />
-                                            <Setter Property="Scale" Value="1.05" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#0e1a13" />
-                                            <Setter Property="Scale" Value="0.95" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Label>
-                        <Label Text="Добавить"
-                               TextColor="#51946c"
-                               FontSize="12"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnAddItemNavTapped" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+            <Grid ColumnDefinitions="*,*,*,*,*"
+                  ColumnSpacing="8"
+                  Padding="16,8,16,8">
 
-                    <!-- Фильтры -->
-                    <VerticalStackLayout x:Name="FiltersNav"
-                                         Spacing="4"
-                                         Grid.Column="2">
-                        <Label x:Name="FiltersLabel"
-                               Text="🔧"
-                               FontSize="24"
-                               TextColor="#51946c"
-                               HorizontalTextAlignment="Center">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#51946c" />
-                                            <Setter Property="Scale" Value="1" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#38e07b" />
-                                            <Setter Property="Scale" Value="1.05" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#0e1a13" />
-                                            <Setter Property="Scale" Value="0.95" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Label>
-                        <Label Text="Фильтры"
-                               TextColor="#51946c"
-                               FontSize="12"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnFiltersNavTapped" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+                <!-- Главная -->
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label x:Name="HomeLabel"
+                           Text="🏠"
+                           FontSize="24"
+                           TextColor="#0e1a13"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Главная"
+                           TextColor="#0e1a13"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
 
-                    <!-- Статистика -->
-                    <VerticalStackLayout x:Name="StatsNav"
-                                         Spacing="4"
-                                         Grid.Column="3">
-                        <Label x:Name="StatsLabel"
-                               Text="📊"
-                               FontSize="24"
-                               TextColor="#51946c"
-                               HorizontalTextAlignment="Center">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#51946c" />
-                                            <Setter Property="Scale" Value="1" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#38e07b" />
-                                            <Setter Property="Scale" Value="1.05" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#0e1a13" />
-                                            <Setter Property="Scale" Value="0.95" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Label>
-                        <Label Text="Статистика"
-                               TextColor="#51946c"
-                               FontSize="12"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnStatsNavTapped" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+                <!-- Добавить -->
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label x:Name="AddItemLabel"
+                           Text="➕"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Добавить"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAddItemNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
 
-                    <!-- Настройки -->
-                    <VerticalStackLayout x:Name="SettingsNav"
-                                         Spacing="4"
-                                         Grid.Column="4">
-                        <Label x:Name="SettingsLabel"
-                               Text="⚙️"
-                               FontSize="24"
-                               TextColor="#51946c"
-                               HorizontalTextAlignment="Center">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#51946c" />
-                                            <Setter Property="Scale" Value="1" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#38e07b" />
-                                            <Setter Property="Scale" Value="1.05" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="TextColor" Value="#0e1a13" />
-                                            <Setter Property="Scale" Value="0.95" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Label>
-                        <Label Text="Настройки"
-                               TextColor="#51946c"
-                               FontSize="12"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnSettingsNavTapped" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
+                <!-- Фильтры -->
+                <VerticalStackLayout Spacing="4" Grid.Column="2">
+                    <Label x:Name="FiltersLabel"
+                           Text="🔧"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Фильтры"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFiltersNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
 
-            <!-- Нижняя область для безопасной зоны -->
-            <BoxView HeightRequest="20"
-                     BackgroundColor="#f8fbfa" />
-        </VerticalStackLayout>
+                <!-- Статистика -->
+                <VerticalStackLayout Spacing="4" Grid.Column="3">
+                    <Label x:Name="StatsLabel"
+                           Text="📊"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Статистика"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnStatsNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+
+                <!-- Настройки -->
+                <VerticalStackLayout Spacing="4" Grid.Column="4">
+                    <Label x:Name="SettingsLabel"
+                           Text="⚙️"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Настройки"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>

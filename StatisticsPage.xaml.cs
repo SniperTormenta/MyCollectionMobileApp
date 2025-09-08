@@ -5,9 +5,19 @@ namespace MyCollectionMobileApp;
 
 public partial class StatisticsPage : ContentPage
 {
+    private bool _isNavigating = false;
+    private SemaphoreSlim _navigationLock = new SemaphoreSlim(1, 1);
+
     public StatisticsPage()
     {
         InitializeComponent();
+        LoadStatistics();
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        // Обновляем статистику при каждом открытии страницы
         LoadStatistics();
     }
 
@@ -190,6 +200,129 @@ public partial class StatisticsPage : ContentPage
 
     private async void OnBackButtonClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        if (!await AcquireNavigationLock()) return;
+
+        try
+        {
+            // Простая пульсация кнопки назад
+            if (sender is ImageButton backButton)
+            {
+                await backButton.ScaleTo(0.9, 80);
+                await backButton.ScaleTo(1.0, 80);
+            }
+
+            await Navigation.PopAsync(false);
+        }
+        finally
+        {
+            ReleaseNavigationLock();
+        }
+    }
+
+    // Обработчики для навигации внизу страницы
+    private async void OnHomeNavTapped(object sender, EventArgs e)
+    {
+        if (!await AcquireNavigationLock()) return;
+
+        try
+        {
+            await PulseAnimation(sender);
+            await Navigation.PopToRootAsync(false);
+        }
+        finally
+        {
+            ReleaseNavigationLock();
+        }
+    }
+
+    private async void OnAddItemNavTapped(object sender, EventArgs e)
+    {
+        if (!await AcquireNavigationLock()) return;
+
+        try
+        {
+            await PulseAnimation(sender);
+            await Navigation.PushAsync(new AddItemPage(), false);
+        }
+        finally
+        {
+            ReleaseNavigationLock();
+        }
+    }
+
+    private async void OnFiltersNavTapped(object sender, EventArgs e)
+    {
+        if (!await AcquireNavigationLock()) return;
+
+        try
+        {
+            await PulseAnimation(sender);
+            await Navigation.PushAsync(new FiltersPage(), false);
+        }
+        finally
+        {
+            ReleaseNavigationLock();
+        }
+    }
+
+    private async void OnStatsNavTapped(object sender, EventArgs e)
+    {
+        // Уже на странице статистики, просто пульсация
+        if (!await AcquireNavigationLock()) return;
+
+        try
+        {
+            await PulseAnimation(sender);
+        }
+        finally
+        {
+            ReleaseNavigationLock();
+        }
+    }
+
+    private async void OnSettingsNavTapped(object sender, EventArgs e)
+    {
+        if (!await AcquireNavigationLock()) return;
+
+        try
+        {
+            await PulseAnimation(sender);
+
+            // Проверяем, существует ли страница настроек
+            // Если нет - просто игнорируем нажатие или показываем сообщение
+            await DisplayAlert("Информация", "Страница настроек в разработке", "OK");
+
+            // Если у вас есть SettingsPage, раскомментируйте строку ниже:
+            // await Navigation.PushAsync(new SettingsPage(), false);
+        }
+        finally
+        {
+            ReleaseNavigationLock();
+        }
+    }
+
+    // Универсальная анимация пульсации
+    private async Task PulseAnimation(object sender)
+    {
+        if (sender is VisualElement element)
+        {
+            await element.ScaleTo(1.1, 80);
+            await element.ScaleTo(1.0, 80);
+        }
+    }
+
+    private async Task<bool> AcquireNavigationLock()
+    {
+        if (_isNavigating) return false;
+        if (!await _navigationLock.WaitAsync(0)) return false;
+
+        _isNavigating = true;
+        return true;
+    }
+
+    private void ReleaseNavigationLock()
+    {
+        _isNavigating = false;
+        _navigationLock.Release();
     }
 }

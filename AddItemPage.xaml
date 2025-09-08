@@ -76,15 +76,16 @@
                         CornerRadius="8"
                         Clicked="OnAddImageClicked" />
 
-                <!-- Контейнер для изображения - ИСПРАВЛЕНО -->
-                <Frame x:Name="ImageContainer"
+                <!-- Контейнер для изображения - ИСПРАВЛЕНО (Frame заменен на Border) -->
+                <Border x:Name="ImageContainer"
                        HeightRequest="200"
                        WidthRequest="200"
                        HorizontalOptions="Center"
                        BackgroundColor="#e8f2ec"
                        Padding="0"
-                       CornerRadius="12"
+                       StrokeShape="RoundRectangle 12"
                        IsVisible="False">
+
                     <Image x:Name="SelectedImage"
                            Aspect="AspectFill"
                            HeightRequest="200"
@@ -96,24 +97,24 @@
                     </Image>
 
                     <!-- Кнопка изменения режима отображения -->
-                    <Frame.GestureRecognizers>
+                    <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnChangeImageAspectClicked" />
-                    </Frame.GestureRecognizers>
+                    </Border.GestureRecognizers>
 
                     <!-- Индикатор режима отображения -->
-                    <Frame.Triggers>
-                        <DataTrigger TargetType="Frame" 
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" 
                                    Binding="{Binding Source={x:Reference SelectedImage}, Path=Aspect}" 
                                    Value="AspectFill">
                             <Setter Property="BackgroundColor" Value="#e8f2ec" />
                         </DataTrigger>
-                        <DataTrigger TargetType="Frame" 
+                        <DataTrigger TargetType="Border" 
                                    Binding="{Binding Source={x:Reference SelectedImage}, Path=Aspect}" 
                                    Value="AspectFit">
                             <Setter Property="BackgroundColor" Value="#d1e6d9" />
                         </DataTrigger>
-                    </Frame.Triggers>
-                </Frame>
+                    </Border.Triggers>
+                </Border>
 
                 <!-- Подпись под изображением -->
                 <Label x:Name="ImageHintLabel"

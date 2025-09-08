@@ -4,202 +4,210 @@
     {
         private Label _currentActiveNav;
         private CollectionService _collectionService;
+        private bool _isNavigating = false;
+        private SemaphoreSlim _navigationLock = new SemaphoreSlim(1, 1);
+        private bool _isGridView = true; // По умолчанию сетка
+
 
         public MainPage()
         {
             InitializeComponent();
             _currentActiveNav = HomeLabel;
             _collectionService = CollectionService.Instance;
-
-            // Устанавливаем контекст данных
             BindingContext = _collectionService;
+
+
+            // Устанавливаем начальный вид отображения
+            UpdateViewLayout();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            // Обновляем коллекцию при каждом появлении страницы
             ItemsCollectionView.ItemsSource = null;
             ItemsCollectionView.ItemsSource = _collectionService.FilteredItems;
         }
 
-        // Добавьте этот метод для обработки нажатия на элемент
-        private async void OnItemTapped(object sender, EventArgs e)
+        private void OnGridTabTapped(object sender, EventArgs e)
         {
-            if (sender is Frame frame && frame.BindingContext is ItemModel item)
+            if (!_isGridView)
             {
-                // Анимация нажатия
-                await frame.ScaleTo(0.95, 100, Easing.SpringOut);
-                await frame.ScaleTo(1, 100, Easing.SpringIn);
-
-                // Переход на страницу деталей элемента
-                await Navigation.PushAsync(new ItemDetailsPage(item));
+                _isGridView = true;
+                UpdateViewLayout();
             }
         }
 
-
-        // Обработчик нажатия на вкладку Grid
-        private void OnGridTabTapped(object sender, EventArgs e)
-        {
-            // Активируем Grid вкладку
-            VisualStateManager.GoToState(GridLabel, "Pressed");
-
-            // Деактивируем List вкладку
-            VisualStateManager.GoToState(ListLabel, "Normal");
-
-            // Меняем внешний вид Border'ов
-            GridTab.Stroke = Color.FromArgb("#38e07b");
-            ListTab.Stroke = Colors.Transparent;
-
-            // Меняем цвета текста (дополнительная визуализация)
-            GridLabel.TextColor = Color.FromArgb("#0e1a13");
-            ListLabel.TextColor = Color.FromArgb("#51946c");
-        }
-
-        // Обработчик нажатия на вкладку List
         private void OnListTabTapped(object sender, EventArgs e)
         {
-            // Активируем List вкладку
-            VisualStateManager.GoToState(ListLabel, "Pressed");
-
-            // Деактивируем Grid вкладку
-            VisualStateManager.GoToState(GridLabel, "Normal");
-
-            // Меняем внешний вид Border'ов
-            ListTab.Stroke = Color.FromArgb("#38e07b");
-            GridTab.Stroke = Colors.Transparent;
-
-            // Меняем цвета текста (дополнительная визуализация)
-            ListLabel.TextColor = Color.FromArgb("#0e1a13");
-            GridLabel.TextColor = Color.FromArgb("#51946c");
+            if (_isGridView)
+            {
+                _isGridView = false;
+                UpdateViewLayout();
+            }
         }
 
-        // Анимированное нажатие для навигационных иконок
-        private async Task AnimateNavIcon(Label icon, bool isActivating)
+        private void UpdateViewLayout()
         {
-            // Анимация нажатия
-            await icon.ScaleTo(0.8, 100, Easing.SpringOut);
-            await icon.ScaleTo(1, 100, Easing.SpringIn);
-
-            if (isActivating)
+            if (_isGridView)
             {
-                // Анимация активации - пульсация
-                await icon.ScaleTo(1.1, 150, Easing.SinOut);
-                await icon.ScaleTo(1, 150, Easing.SinIn);
-
-                // Анимация изменения цвета
-                await icon.FadeTo(1, 200);
-                icon.TextColor = Color.FromArgb("#0e1a13");
+                // Режим сетки (2 колонки)
+                ItemsCollectionView.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical)
+                {
+                    HorizontalItemSpacing = 12,
+                    VerticalItemSpacing = 12
+                };
             }
             else
             {
-                // Анимация деактивации
-                icon.TextColor = Color.FromArgb("#51946c");
-                await icon.FadeTo(0.8, 200);
+                // Режим списка (1 колонка)
+                ItemsCollectionView.ItemsLayout = new LinearItemsLayout(ItemsLayoutOrientation.Vertical)
+                {
+                    ItemSpacing = 12
+                };
             }
         }
 
-        // Анимация для Home
+
+        private async void OnItemTapped(object sender, EventArgs e)
+        {
+            if (!await AcquireNavigationLock()) return;
+
+            try
+            {
+                if (sender is Border border && border.BindingContext is ItemModel item)
+                {
+                    // Простая пульсация
+                    await border.ScaleTo(0.95, 80);
+                    await border.ScaleTo(1, 80);
+                    await Navigation.PushAsync(new ItemDetailsPage(item), false);
+                }
+            }
+            finally
+            {
+                ReleaseNavigationLock();
+            }
+        }
+
         private async void OnHomeNavTapped(object sender, EventArgs e)
         {
-            if (_currentActiveNav != HomeLabel)
-            {
-                await AnimateNavIcon(_currentActiveNav, false);
-                _currentActiveNav = HomeLabel;
-                await AnimateNavIcon(HomeLabel, true);
+            if (!await AcquireNavigationLock()) return;
 
-                // Дополнительная логика перехода на главную
-                await HomeLabel.RotateTo(360, 300, Easing.SpringOut);
-                HomeLabel.Rotation = 0;
+            try
+            {
+                // Пульсация
+                await PulseAnimation(HomeLabel);
+                _currentActiveNav = HomeLabel;
+                ResetNavColors();
+                HomeLabel.TextColor = Color.FromArgb("#0e1a13");
+            }
+            finally
+            {
+                ReleaseNavigationLock();
             }
         }
 
-        // Анимация для Add Item - ПЕРЕХОД НА СТРАНИЦУ ДОБАВЛЕНИЯ
         private async void OnAddItemNavTapped(object sender, EventArgs e)
         {
-            // Анимация нажатия
-            await AddItemLabel.ScaleTo(0.8, 100, Easing.SpringOut);
-            await AddItemLabel.ScaleTo(1, 100, Easing.SpringIn);
+            if (!await AcquireNavigationLock()) return;
 
-            // Анимация вращения для плюсика
-            await AddItemLabel.RotateTo(90, 200, Easing.BounceOut);
-            await AddItemLabel.RotateTo(0, 200, Easing.BounceOut);
-
-            // ИЗМЕНИТЕ эту строку - используйте конструктор без параметров
-            await Navigation.PushAsync(new AddItemPage());
-
-            // Возвращаем цвет к исходному после перехода
-            AddItemLabel.TextColor = Color.FromArgb("#51946c");
+            try
+            {
+                // Пульсация и переход
+                await PulseAnimation(AddItemLabel);
+                await Navigation.PushAsync(new AddItemPage(), false);
+            }
+            finally
+            {
+                ReleaseNavigationLock();
+            }
         }
 
-        // Анимация для Filters
         private async void OnFiltersNavTapped(object sender, EventArgs e)
         {
-            if (_currentActiveNav != FiltersLabel)
+            if (!await AcquireNavigationLock()) return;
+
+            try
             {
-                await AnimateNavIcon(_currentActiveNav, false);
+                // Пульсация и переход
+                await PulseAnimation(FiltersLabel);
                 _currentActiveNav = FiltersLabel;
-                await AnimateNavIcon(FiltersLabel, true);
-
-                // Анимация "встряски" для инструмента
-                await FiltersLabel.RotateTo(-15, 100, Easing.SinOut);
-                await FiltersLabel.RotateTo(15, 100, Easing.SinOut);
-                await FiltersLabel.RotateTo(-10, 80, Easing.SinOut);
-                await FiltersLabel.RotateTo(10, 80, Easing.SinOut);
-                await FiltersLabel.RotateTo(0, 100, Easing.SpringOut);
-
-                // Переход на страницу фильтров
-                await Navigation.PushAsync(new FiltersPage());
+                ResetNavColors();
+                FiltersLabel.TextColor = Color.FromArgb("#0e1a13");
+                await Navigation.PushAsync(new FiltersPage(), false);
+            }
+            finally
+            {
+                ReleaseNavigationLock();
             }
         }
 
-        // Анимация для Statistics
         private async void OnStatsNavTapped(object sender, EventArgs e)
         {
-            if (_currentActiveNav != StatsLabel)
+            if (!await AcquireNavigationLock()) return;
+
+            try
             {
-                await AnimateNavIcon(_currentActiveNav, false);
+                // Пульсация и переход
+                await PulseAnimation(StatsLabel);
                 _currentActiveNav = StatsLabel;
-                await AnimateNavIcon(StatsLabel, true);
-
-                // Анимация "пульсации" для статистики
-                await StatsLabel.ScaleTo(1.2, 150, Easing.SinOut);
-                await StatsLabel.ScaleTo(1, 150, Easing.SinIn);
-                await StatsLabel.ScaleTo(1.1, 100, Easing.SinOut);
-                await StatsLabel.ScaleTo(1, 100, Easing.SinIn);
-
-                // Переход на страницу статистики
-                await Navigation.PushAsync(new StatisticsPage());
+                ResetNavColors();
+                StatsLabel.TextColor = Color.FromArgb("#0e1a13");
+                await Navigation.PushAsync(new StatisticsPage(), false);
+            }
+            finally
+            {
+                ReleaseNavigationLock();
             }
         }
 
-        // Анимация для Settings
         private async void OnSettingsNavTapped(object sender, EventArgs e)
         {
-            if (_currentActiveNav != SettingsLabel)
+            if (!await AcquireNavigationLock()) return;
+
+            try
             {
-                await AnimateNavIcon(_currentActiveNav, false);
+                // Пульсация
+                await PulseAnimation(SettingsLabel);
                 _currentActiveNav = SettingsLabel;
-                await AnimateNavIcon(SettingsLabel, true);
-
-                // Анимация вращения шестеренки
-                await SettingsLabel.RotateTo(360, 400, Easing.CubicInOut);
-                SettingsLabel.Rotation = 0;
-
-                // Дополнительная пульсация
-                await SettingsLabel.ScaleTo(1.15, 100, Easing.SinOut);
-                await SettingsLabel.ScaleTo(1, 100, Easing.SinIn);
+                ResetNavColors();
+                SettingsLabel.TextColor = Color.FromArgb("#0e1a13");
+            }
+            finally
+            {
+                ReleaseNavigationLock();
             }
         }
 
-        // Дополнительный метод для сброса анимаций при необходимости
-        private void ResetAllNavStates()
+        // Универсальная анимация пульсации
+        private async Task PulseAnimation(VisualElement element)
         {
-            VisualStateManager.GoToState(HomeLabel, "Normal");
-            VisualStateManager.GoToState(AddItemLabel, "Normal");
-            VisualStateManager.GoToState(FiltersLabel, "Normal");
-            VisualStateManager.GoToState(StatsLabel, "Normal");
-            VisualStateManager.GoToState(SettingsLabel, "Normal");
+            await element.ScaleTo(1.1, 100);
+            await element.ScaleTo(1.0, 100);
+        }
+
+        private async Task<bool> AcquireNavigationLock()
+        {
+            if (_isNavigating) return false;
+            if (!await _navigationLock.WaitAsync(0)) return false;
+
+            _isNavigating = true;
+            return true;
+        }
+
+        private void ReleaseNavigationLock()
+        {
+            _isNavigating = false;
+            _navigationLock.Release();
+        }
+
+        // Сброс цветов навигации
+        private void ResetNavColors()
+        {
+            HomeLabel.TextColor = Color.FromArgb("#51946c");
+            AddItemLabel.TextColor = Color.FromArgb("#51946c");
+            FiltersLabel.TextColor = Color.FromArgb("#51946c");
+            StatsLabel.TextColor = Color.FromArgb("#51946c");
+            SettingsLabel.TextColor = Color.FromArgb("#51946c");
         }
     }
 }

@@ -98,11 +98,10 @@
                                      Margin="16,8,16,16">
 
                     <!-- По названию -->
-                    <Frame BackgroundColor="Transparent"
-                           BorderColor="{Binding SortByNameBorderColor}"
-                           CornerRadius="8"
-                           Padding="15"
-                           HasShadow="False">
+                    <Border BackgroundColor="Transparent"
+                           Stroke="{Binding SortByNameBorderColor}"
+                           StrokeShape="RoundRectangle 8"
+                           Padding="15">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Text="По названию"
                                    TextColor="#0e1a13"
@@ -117,17 +116,16 @@
                                          VerticalOptions="Center"
                                          IsVisible="False"/>
                         </Grid>
-                        <Frame.GestureRecognizers>
+                        <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSortByNameTapped" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                        </Border.GestureRecognizers>
+                    </Border>
 
                     <!-- По дате добавления -->
-                    <Frame BackgroundColor="Transparent"
-                           BorderColor="{Binding SortByDateBorderColor}"
-                           CornerRadius="8"
-                           Padding="15"
-                           HasShadow="False">
+                    <Border BackgroundColor="Transparent"
+                           Stroke="{Binding SortByDateBorderColor}"
+                           StrokeShape="RoundRectangle 8"
+                           Padding="15">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Text="По дате добавления"
                                    TextColor="#0e1a13"
@@ -142,17 +140,16 @@
                                          VerticalOptions="Center"
                                          IsVisible="False"/>
                         </Grid>
-                        <Frame.GestureRecognizers>
+                        <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSortByDateTapped" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                        </Border.GestureRecognizers>
+                    </Border>
 
                     <!-- По цене -->
-                    <Frame BackgroundColor="Transparent"
-                           BorderColor="{Binding SortByPriceBorderColor}"
-                           CornerRadius="8"
-                           Padding="15"
-                           HasShadow="False">
+                    <Border BackgroundColor="Transparent"
+                           Stroke="{Binding SortByPriceBorderColor}"
+                           StrokeShape="RoundRectangle 8"
+                           Padding="15">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Text="По цене"
                                    TextColor="#0e1a13"
@@ -167,10 +164,10 @@
                                          VerticalOptions="Center"
                                          IsVisible="False"/>
                         </Grid>
-                        <Frame.GestureRecognizers>
+                        <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSortByPriceTapped" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                        </Border.GestureRecognizers>
+                    </Border>
 
                 </VerticalStackLayout>
 

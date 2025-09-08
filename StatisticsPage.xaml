@@ -49,12 +49,12 @@
                       Margin="16,8,16,16">
 
                     <!-- Общее количество -->
-                    <Frame Grid.Row="0" Grid.Column="0"
+                    <Border Grid.Row="0" Grid.Column="0"
                            BackgroundColor="White"
-                           BorderColor="#d1e6d9"
-                           CornerRadius="12"
-                           Padding="16"
-                           HasShadow="False">
+                           Stroke="#d1e6d9"
+                           StrokeThickness="1"
+                           StrokeShape="RoundRectangle 12"
+                           Padding="16">
                         <VerticalStackLayout Spacing="8">
                             <Label Text="Всего элементов"
                                    TextColor="#0e1a13"
@@ -68,15 +68,15 @@
                                    TextColor="#51946c"
                                    FontSize="14"/>
                         </VerticalStackLayout>
-                    </Frame>
+                    </Border>
 
                     <!-- Общая стоимость -->
-                    <Frame Grid.Row="0" Grid.Column="1"
+                    <Border Grid.Row="0" Grid.Column="1"
                            BackgroundColor="White"
-                           BorderColor="#d1e6d9"
-                           CornerRadius="12"
-                           Padding="16"
-                           HasShadow="False">
+                           Stroke="#d1e6d9"
+                           StrokeThickness="1"
+                           StrokeShape="RoundRectangle 12"
+                           Padding="16">
                         <VerticalStackLayout Spacing="8">
                             <Label Text="Общая стоимость"
                                    TextColor="#0e1a13"
@@ -90,15 +90,15 @@
                                    TextColor="#51946c"
                                    FontSize="14"/>
                         </VerticalStackLayout>
-                    </Frame>
+                    </Border>
 
                     <!-- Средняя стоимость -->
-                    <Frame Grid.Row="1" Grid.Column="0"
+                    <Border Grid.Row="1" Grid.Column="0"
                            BackgroundColor="White"
-                           BorderColor="#d1e6d9"
-                           CornerRadius="12"
-                           Padding="16"
-                           HasShadow="False">
+                           Stroke="#d1e6d9"
+                           StrokeThickness="1"
+                           StrokeShape="RoundRectangle 12"
+                           Padding="16">
                         <VerticalStackLayout Spacing="8">
                             <Label Text="Средняя стоимость"
                                    TextColor="#0e1a13"
@@ -112,15 +112,15 @@
                                    TextColor="#51946c"
                                    FontSize="14"/>
                         </VerticalStackLayout>
-                    </Frame>
+                    </Border>
 
                     <!-- Последнее добавление -->
-                    <Frame Grid.Row="1" Grid.Column="1"
+                    <Border Grid.Row="1" Grid.Column="1"
                            BackgroundColor="White"
-                           BorderColor="#d1e6d9"
-                           CornerRadius="12"
-                           Padding="16"
-                           HasShadow="False">
+                           Stroke="#d1e6d9"
+                           StrokeThickness="1"
+                           StrokeShape="RoundRectangle 12"
+                           Padding="16">
                         <VerticalStackLayout Spacing="8">
                             <Label Text="Последнее добавление"
                                    TextColor="#0e1a13"
@@ -134,7 +134,7 @@
                                    TextColor="#51946c"
                                    FontSize="14"/>
                         </VerticalStackLayout>
-                    </Frame>
+                    </Border>
                 </Grid>
 
                 <!-- Статистика по категориям -->
@@ -144,17 +144,17 @@
                        FontAttributes="Bold"
                        Margin="16,20,16,8"/>
 
-                <Frame BackgroundColor="White"
-                       BorderColor="#d1e6d9"
-                       CornerRadius="12"
+                <Border BackgroundColor="White"
+                       Stroke="#d1e6d9"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 12"
                        Padding="16"
-                       Margin="16,8,16,16"
-                       HasShadow="False">
+                       Margin="16,8,16,16">
                     <VerticalStackLayout x:Name="CategoryStatsContainer" 
                                          Spacing="8">
                         <!-- Категории будут добавляться динамически -->
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
                 <!-- Топ-5 самых ценных -->
                 <Label Text="Самые ценные элементы"
@@ -163,17 +163,17 @@
                        FontAttributes="Bold"
                        Margin="16,20,16,8"/>
 
-                <Frame BackgroundColor="White"
-                       BorderColor="#d1e6d9"
-                       CornerRadius="12"
+                <Border BackgroundColor="White"
+                       Stroke="#d1e6d9"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 12"
                        Padding="16"
-                       Margin="16,8,16,16"
-                       HasShadow="False">
+                       Margin="16,8,16,16">
                     <VerticalStackLayout x:Name="MostValuableContainer" 
                                          Spacing="8">
                         <!-- Элементы будут добавляться динамически -->
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
                 <!-- Топ-5 самых старых -->
                 <Label Text="Самые старые элементы"
@@ -182,103 +182,110 @@
                        FontAttributes="Bold"
                        Margin="16,20,16,8"/>
 
-                <Frame BackgroundColor="White"
-                       BorderColor="#d1e6d9"
-                       CornerRadius="12"
+                <Border BackgroundColor="White"
+                       Stroke="#d1e6d9"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 12"
                        Padding="16"
-                       Margin="16,8,16,16"
-                       HasShadow="False">
+                       Margin="16,8,16,16">
                     <VerticalStackLayout x:Name="OldestItemsContainer" 
                                          Spacing="8">
                         <!-- Элементы будут добавляться динамически -->
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>
 
         <!-- Нижняя навигация -->
-        <ContentView Grid.Row="2"
-                     BackgroundColor="#f8fbfa"
-                     Padding="0,8,0,0">
-            <BoxView HeightRequest="1"
-                     BackgroundColor="#e8f2ec"/>
+        <Border Grid.Row="2"
+                BackgroundColor="#f8fbfa"
+                Padding="0,8,0,0"
+                Stroke="#e8f2ec"
+                StrokeThickness="1"
+                StrokeShape="Rectangle">
 
             <Grid ColumnDefinitions="*,*,*,*,*"
                   ColumnSpacing="8"
                   Padding="16,8,16,8">
 
                 <!-- Главная -->
-                <VerticalStackLayout Spacing="4"
-                                     Grid.Column="0">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
                     <Label Text="🏠"
-                           FontSize="24"
-                           TextColor="#51946c"
-                           HorizontalOptions="Center"/>
+           FontSize="24"
+           TextColor="#51946c"
+           HorizontalOptions="Center"/>
                     <Label Text="Главная"
-                           TextColor="#51946c"
-                           FontSize="12"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
+           TextColor="#51946c"
+           FontSize="12"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
 
-                <!-- Добавить -->
-                <VerticalStackLayout Spacing="4"
-                                     Grid.Column="1">
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
                     <Label Text="➕"
-                           FontSize="24"
-                           TextColor="#51946c"
-                           HorizontalOptions="Center"/>
+           FontSize="24"
+           TextColor="#51946c"
+           HorizontalOptions="Center"/>
                     <Label Text="Добавить"
-                           TextColor="#51946c"
-                           FontSize="12"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
+           TextColor="#51946c"
+           FontSize="12"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAddItemNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
 
-                <!-- Фильтры -->
-                <VerticalStackLayout Spacing="4"
-                                     Grid.Column="2">
+                <VerticalStackLayout Spacing="4" Grid.Column="2">
                     <Label Text="🔧"
-                           FontSize="24"
-                           TextColor="#51946c"
-                           HorizontalOptions="Center"/>
+           FontSize="24"
+           TextColor="#51946c"
+           HorizontalOptions="Center"/>
                     <Label Text="Фильтры"
-                           TextColor="#51946c"
-                           FontSize="12"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
+           TextColor="#51946c"
+           FontSize="12"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFiltersNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
 
-                <!-- Статистика -->
-                <VerticalStackLayout Spacing="4"
-                                     Grid.Column="3">
+                <VerticalStackLayout Spacing="4" Grid.Column="3">
                     <Label Text="📊"
-                           FontSize="24"
-                           TextColor="#0e1a13"
-                           HorizontalOptions="Center"/>
+           FontSize="24"
+           TextColor="#0e1a13"
+           HorizontalOptions="Center"/>
                     <Label Text="Статистика"
-                           TextColor="#0e1a13"
-                           FontSize="12"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
+           TextColor="#0e1a13"
+           FontSize="12"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnStatsNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
 
-                <!-- Настройки -->
-                <VerticalStackLayout Spacing="4"
-                                     Grid.Column="4">
+                <VerticalStackLayout Spacing="4" Grid.Column="4">
                     <Label Text="⚙️"
-                           FontSize="24"
-                           TextColor="#51946c"
-                           HorizontalOptions="Center"/>
+           FontSize="24"
+           TextColor="#51946c"
+           HorizontalOptions="Center"/>
                     <Label Text="Настройки"
-                           TextColor="#51946c"
-                           FontSize="12"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
+           TextColor="#51946c"
+           FontSize="12"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
             </Grid>
-        </ContentView>
+        </Border>
 
     </Grid>
 </ContentPage>
