@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCollectionMobileApp.SettingsPage"
+             BackgroundColor="#f8fbfa"
+             Title="Настройки">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          RowSpacing="0">
+
+        <!-- Шапка с кнопкой назад -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="Auto,*,Auto" 
+              BackgroundColor="#f8fbfa" 
+              Padding="16,12,16,8">
+
+            <ImageButton x:Name="BackButton"
+                         Source="back_icon.png"
+                         WidthRequest="24"
+                         HeightRequest="24"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Center"
+                         Clicked="OnBackButtonClicked"/>
+
+            <Label Grid.Column="1"
+                   Text="Настройки"
+                   TextColor="#0e1a13"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Контент настроек -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="0">
+
+                <!-- Внешний вид -->
+                <Label Text="Внешний вид"
+                       TextColor="#0e1a13"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       Margin="16,20,16,8"/>
+
+                <!-- Тема -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Тема"
+                                   TextColor="#0e1a13"
+                                   FontSize="16"
+                                   FontAttributes="Bold"/>
+                            <Label Text="Системная"
+                                   TextColor="#51946c"
+                                   FontSize="14"/>
+                        </VerticalStackLayout>
+                        <Label Text="Светлая"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
+                    </Grid>
+                </Border>
+
+                <!-- Иконка приложения -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Иконка приложения"
+                                   TextColor="#0e1a13"
+                                   FontSize="16"
+                                   FontAttributes="Bold"/>
+                            <Label Text="По умолчанию"
+                                   TextColor="#51946c"
+                                   FontSize="14"/>
+                        </VerticalStackLayout>
+                        <Label Text="Классическая"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
+                    </Grid>
+                </Border>
+
+                <!-- Аккаунт -->
+                <Label Text="Аккаунт"
+                       TextColor="#0e1a13"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       Margin="16,20,16,8"/>
+
+                <!-- Профиль -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Профиль"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnProfileClicked"/>
+                    </Grid>
+                </Border>
+
+                <!-- Уведомления -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Уведомления"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnNotificationsClicked"/>
+                    </Grid>
+                </Border>
+
+                <!-- Безопасность -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Безопасность"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnSecurityClicked"/>
+                    </Grid>
+                </Border>
+
+                <!-- Приватность -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Приватность"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnPrivacyClicked"/>
+                    </Grid>
+                </Border>
+
+                <!-- Поддержка -->
+                <Label Text="Поддержка"
+                       TextColor="#0e1a13"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       Margin="16,20,16,8"/>
+
+                <!-- Центр помощи -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Центр помощи"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnHelpCenterClicked"/>
+                    </Grid>
+                </Border>
+
+                <!-- Связаться с нами -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Связаться с нами"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnContactUsClicked"/>
+                    </Grid>
+                </Border>
+
+                <!-- Условия использования -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,0">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Условия использования"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnTermsClicked"/>
+                    </Grid>
+                </Border>
+
+                <!-- Политика конфиденциальности -->
+                <Border BackgroundColor="White"
+                       Stroke="#e8f2ec"
+                       StrokeThickness="1"
+                       StrokeShape="RoundRectangle 0"
+                       Padding="16,12"
+                       Margin="16,0,16,8">
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="8">
+                        <Label Text="Политика конфиденциальности"
+                               TextColor="#0e1a13"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <ImageButton Source="arrow_right.png"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Clicked="OnPrivacyPolicyClicked"/>
+                    </Grid>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Нижняя навигация -->
+        <Border Grid.Row="2"
+                BackgroundColor="#f8fbfa"
+                Padding="0,8,0,0"
+                Stroke="#e8f2ec"
+                StrokeThickness="1"
+                StrokeShape="Rectangle">
+
+            <Grid ColumnDefinitions="*,*,*,*,*"
+                  ColumnSpacing="8"
+                  Padding="16,8,16,8">
+
+                <!-- Главная -->
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="🏠"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Главная"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+
+                <!-- Добавить -->
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="➕"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Добавить"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAddItemNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+
+                <!-- Фильтры -->
+                <VerticalStackLayout Spacing="4" Grid.Column="2">
+                    <Label Text="🔧"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Фильтры"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFiltersNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+
+                <!-- Статистика -->
+                <VerticalStackLayout Spacing="4" Grid.Column="3">
+                    <Label Text="📊"
+                           FontSize="24"
+                           TextColor="#51946c"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Статистика"
+                           TextColor="#51946c"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnStatsNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+
+                <!-- Настройки -->
+                <VerticalStackLayout Spacing="4" Grid.Column="4">
+                    <Label Text="⚙️"
+                           FontSize="24"
+                           TextColor="#0e1a13"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Настройки"
+                           TextColor="#0e1a13"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsNavTapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

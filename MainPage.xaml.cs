@@ -171,6 +171,7 @@
                 _currentActiveNav = SettingsLabel;
                 ResetNavColors();
                 SettingsLabel.TextColor = Color.FromArgb("#0e1a13");
+                await Navigation.PushAsync(new SettingsPage(), false);
             }
             finally
             {

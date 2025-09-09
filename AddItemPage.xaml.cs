@@ -25,7 +25,7 @@ public partial class AddItemPage : ContentPage
 
     private async void OnBackButtonClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        await Navigation.PopAsync(false);
     }
 
     private async void OnAddImageClicked(object sender, EventArgs e)
