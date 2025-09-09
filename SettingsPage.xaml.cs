@@ -26,6 +26,33 @@ namespace MyCollectionMobileApp
             }
         }
 
+        // Новые методы для блоков "Внешний вид"
+        private async void OnThemeClicked(object sender, EventArgs e)
+        {
+            if (!await AcquireNavigationLock()) return;
+            try
+            {
+                await DisplayAlert("🎨 Тема", "Выбрать тему? Хорошая попытка! Здесь только светлая... пока что", "Ок, буду ждать");
+            }
+            finally
+            {
+                ReleaseNavigationLock();
+            }
+        }
+
+        private async void OnAppIconClicked(object sender, EventArgs e)
+        {
+            if (!await AcquireNavigationLock()) return;
+            try
+            {
+                await DisplayAlert("📱 Иконка приложения", "Хотите сменить иконку? Мечтайте! Пока только классическая", "Мечтать не вредно");
+            }
+            finally
+            {
+                ReleaseNavigationLock();
+            }
+        }
+
         // Заглушки для кнопок настроек с креативными сообщениями
         private async void OnProfileClicked(object sender, EventArgs e)
         {

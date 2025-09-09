@@ -6,7 +6,6 @@ namespace MyCollectionMobileApp;
 
 public class ItemModel
 {
-    public string CostFormatted => $"{Cost:N0} {Currency}"; // для правильного отображения валюты
     public string Name { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
     public string ImagePath { get; set; } = string.Empty;
@@ -33,4 +32,21 @@ public class ItemModel
     {
         "RUB", "USD", "EUR", "GBP"
     };
+
+    public string CostFormatted
+    {
+        get
+        {
+            var currencySymbol = Currency switch
+            {
+                "USD" => "$",
+                "EUR" => "€",
+                "GBP" => "£",
+                "RUB" => "₽",
+                _ => Currency
+            };
+
+            return $"{Cost:N2} {currencySymbol}";
+        }
+    }
 }

@@ -72,11 +72,6 @@ public partial class ItemDetailsPage : ContentPage
         }
     }
 
-    private async void OnBackButtonClicked(object sender, EventArgs e)
-    {
-        await Navigation.PopAsync();
-    }
-
     private async void OnEditButtonClicked(object sender, EventArgs e)
     {
         // Переход на страницу редактирования
@@ -92,7 +87,9 @@ public partial class ItemDetailsPage : ContentPage
         {
             CollectionService.Instance.RemoveItem(_item);
             await DisplayAlert("Успех", "Элемент удален", "OK");
-            await Navigation.PopAsync();
+
+            // Возврат на главную страницу
+            await Navigation.PopToRootAsync();
         }
     }
 }

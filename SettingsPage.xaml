@@ -43,7 +43,8 @@
                        Margin="16,20,16,8"/>
 
                 <!-- Тема -->
-                <Border BackgroundColor="White"
+                <Border x:Name="ThemeBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -66,10 +67,14 @@
                                VerticalOptions="Center"
                                Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnThemeClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Иконка приложения -->
-                <Border BackgroundColor="White"
+                <Border x:Name="AppIconBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -92,6 +97,9 @@
                                VerticalOptions="Center"
                                Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAppIconClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Аккаунт -->
@@ -102,7 +110,8 @@
                        Margin="16,20,16,8"/>
 
                 <!-- Профиль -->
-                <Border BackgroundColor="White"
+                <Border x:Name="ProfileBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -114,18 +123,22 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnProfileClicked"/>
+                        <!-- Черная стрелка через FontImageSource -->
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProfileClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Уведомления -->
-                <Border BackgroundColor="White"
+                <Border x:Name="NotificationsBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -137,18 +150,21 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnNotificationsClicked"/>
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNotificationsClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Безопасность -->
-                <Border BackgroundColor="White"
+                <Border x:Name="SecurityBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -160,18 +176,21 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnSecurityClicked"/>
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSecurityClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Приватность -->
-                <Border BackgroundColor="White"
+                <Border x:Name="PrivacyBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -183,14 +202,16 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnPrivacyClicked"/>
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPrivacyClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Поддержка -->
@@ -201,7 +222,8 @@
                        Margin="16,20,16,8"/>
 
                 <!-- Центр помощи -->
-                <Border BackgroundColor="White"
+                <Border x:Name="HelpCenterBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -213,18 +235,21 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnHelpCenterClicked"/>
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHelpCenterClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Связаться с нами -->
-                <Border BackgroundColor="White"
+                <Border x:Name="ContactUsBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -236,18 +261,21 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnContactUsClicked"/>
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnContactUsClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Условия использования -->
-                <Border BackgroundColor="White"
+                <Border x:Name="TermsBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -259,18 +287,21 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnTermsClicked"/>
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTermsClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
                 <!-- Политика конфиденциальности -->
-                <Border BackgroundColor="White"
+                <Border x:Name="PrivacyPolicyBorder"
+                        BackgroundColor="White"
                        Stroke="#e8f2ec"
                        StrokeThickness="1"
                        StrokeShape="RoundRectangle 0"
@@ -282,14 +313,16 @@
                                TextColor="#0e1a13"
                                FontSize="16"
                                VerticalOptions="Center"/>
-                        <ImageButton Source="arrow_right.png"
-                                    WidthRequest="24"
-                                    HeightRequest="24"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    Grid.Column="1"
-                                    Clicked="OnPrivacyPolicyClicked"/>
+                        <Image Source="{FontImageSource FontFamily=MaterialIcons, Glyph=chevron_right, Color=#0e1a13, Size=24}"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Grid.Column="1"/>
                     </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPrivacyPolicyClicked" />
+                    </Border.GestureRecognizers>
                 </Border>
 
             </VerticalStackLayout>
